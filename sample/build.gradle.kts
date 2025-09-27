@@ -8,19 +8,19 @@ kotlin {
     // Target declarations - add or remove as needed below. These define
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
+
     androidLibrary {
         namespace = "app.romanmarinov.sample"
         compileSdk = 35
         minSdk = 26
 
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
+//        withHostTestBuilder {  }
+//
+//        withDeviceTestBuilder {
+//            sourceSetTreeName = "test"
+//        }.configure {
+//            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        }
     }
 
     // For iOS targets, this is also where you should
@@ -30,23 +30,13 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "sampleKit"
-
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "sampleKit"
         }
     }
 
@@ -66,14 +56,6 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.junit)
-            }
         }
     }
 }

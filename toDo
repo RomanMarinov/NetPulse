@@ -1,0 +1,40 @@
+/
+├── .gitignore
+├── build.gradle.kts
+├── gradle.properties
+├── gradlew
+├── local.properties
+├── settings.gradle.kts
+│
+├── gradle
+│   ├── libs.versions.toml
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+│
+├── netpulse
+│   ├── build.gradle.kts
+│   └── src
+│       ├── androidMain
+│       │   └── kotlin
+│       │       └── ...   # Android-специфичный код (например, платформенные реализации)
+│       ├── commonMain
+│       │   └── kotlin
+│       │       └── ...   # общий (shared) код
+│       └── iosMain
+│           └── kotlin
+│               └── ...   # iOS-специфичный код
+│
+└── sample
+    ├── .gitignore
+    ├── build.gradle.kts
+    └── src
+        ├── androidMain
+        │   └── kotlin
+        │       └── ...   # Android-часть sample-приложения
+        ├── commonMain
+        │   └── kotlin
+        │       └── ...   # общий код sample-приложения
+        └── iosMain
+            └── kotlin
+                └── ...   # iOS-часть sample-приложения
