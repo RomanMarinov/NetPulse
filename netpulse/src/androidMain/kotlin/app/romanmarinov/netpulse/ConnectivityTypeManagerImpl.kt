@@ -1,5 +1,6 @@
 package app.romanmarinov.netpulse
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -9,6 +10,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
+@SuppressLint("MissingPermission")
 class ConnectivityTypeManagerImpl(
     private val context: Context
 ) : ConnectivityTypeManager {
@@ -37,7 +39,6 @@ class ConnectivityTypeManagerImpl(
 
         // отправляем текущее состояние сразу
         readNetworkState()?.let { trySend(it) }
-
         awaitClose { cm.unregisterNetworkCallback(callback) }
     }
 

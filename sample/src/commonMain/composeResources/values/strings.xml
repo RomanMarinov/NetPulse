@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="title">Connectivity Status</string>
+    <string name="wifi_async">WIFI async:</string>
+    <string name="cellular_async">Cellular async:</string>
+    <string name="vpn_async">VPN async:</string>
+    <string name="wifi_sync">WIFI sync:</string>
+    <string name="cellular_sync">Cellular sync:</string>
+    <string name="vpn_sync">VPN sync:</string>
+    <string name="button_text">Get network state</string>
+    <string name="unknown">unknown</string>
+</resources>
