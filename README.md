@@ -28,7 +28,7 @@
 kotlin
 sourceSets {
     commonMain.dependencies {
-        api("app.romanmarinov.netpulse:compose-connectivity:<version>")
+     implementation("io.github.romanmarinov.netpulse:netpulse:<version>")
     }
 }
 ```
