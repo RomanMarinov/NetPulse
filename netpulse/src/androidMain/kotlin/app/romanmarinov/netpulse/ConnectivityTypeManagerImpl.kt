@@ -37,7 +37,6 @@ class ConnectivityTypeManagerImpl(
         val request = NetworkRequest.Builder().build()
         cm.registerNetworkCallback(request, callback)
 
-        // отправляем текущее состояние сразу
         readNetworkState()?.let { trySend(it) }
         awaitClose { cm.unregisterNetworkCallback(callback) }
     }
