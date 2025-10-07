@@ -90,7 +90,8 @@ LaunchedEffect(stateNetworkAsync) {
     Logger.d("Cellular: ${stateNetworkAsync?.cellular}")
 }
 ```
-
+<details>
+<summary>
 //## iOS экспорт библиотеки
 //```
 //listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
@@ -99,6 +100,8 @@ LaunchedEffect(stateNetworkAsync) {
 //    }
 //}
 //```
+  </summary>
+  </details>
 ## Минимальные требования
 
 Android: minSdk 24
