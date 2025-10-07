@@ -28,7 +28,7 @@
 kotlin
 sourceSets {
     commonMain.dependencies {
-     implementation("io.github.romanmarinov.netpulse:netpulse:<version>")
+         implementation("io.github.romanmarinov.netpulse:netpulse:<version>")
     }
 }
 ```
