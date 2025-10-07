@@ -35,7 +35,7 @@ sourceSets {
 ```
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
-## 1. Создайте менеджер для отслеживания типа подключения
+## Создайте менеджер для отслеживания типа подключения
 #### AndroidMain sourceSet 
 ```
 import app.romanmarinov.netpulse.ConnectivityTypeManager
@@ -56,7 +56,7 @@ actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
     return connectivityManagerFactory()
 }
 ```
-## 2. Получение текущего статуса сети
+## Получение текущего статуса сети
 #### commonMain sourceSet 
 ```
 val connectivityTypeManager: ConnectivityTypeManager = connectivityManagerPlatform()
@@ -73,7 +73,7 @@ LaunchedEffect(stateNetworkSync) {
     Logger.d("Cellular: ${stateNetworkSync?.cellular}")
 }
 ```
-## 3. Подписка на изменения соединения
+## Подписка на изменения соединения
 #### commonMain sourceSet 
 ```
 var stateNetworkAsync by remember { mutableStateOf<ConnectivityType?>(null) }
