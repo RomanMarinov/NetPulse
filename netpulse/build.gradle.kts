@@ -5,32 +5,30 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("maven-publish")
-
-
-    //     alias(libs.plugins.kotlinMultiplatform)
-    //    alias(libs.plugins.androidLibrary) // библиотека, а не приложение
-    //    alias(libs.plugins.composeMultiplatform)
-    //    alias(libs.plugins.composeCompiler)
-    //    id("maven-publish")
+//    id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.34.0"
 }
 
+group = "io.github.romanmarinov.netpulse"
+version = "0.1.2"
+
 kotlin {
+//    jvm()
+
     androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+        publishLibraryVariants("release")
+        withSourcesJar(publish = true)
+
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_11)
+                    freeCompilerArgs.add("-Xjdk-release=${JavaVersion.VERSION_11}")
+                }
+            }
         }
     }
-//    androidTarget {
-//        compilations.all {
-//            compileTaskProvider.configure {
-//                compilerOptions {
-//                    jvmTarget.set(JvmTarget.JVM_11)
-//                }
-//            }
-//        }
-//    }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -51,9 +49,6 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-//            implementation(compose.runtime)
-
-
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material3)
@@ -80,9 +75,130 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    buildTypes {
+        release { }
+        debug { }
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
+
+mavenPublishing {
+    publishToMavenCentral(true)
+    signAllPublications() // Обязательно для релизов
+
+    // Координаты проекта
+    coordinates(
+        groupId = "io.github.romanmarinov.netpulse",
+        artifactId = "netpulse",
+        version = version.toString()
+    )
+
+    // Дополнительно можно задать описание, лицензии, разработчиков и SCM
+    pom {
+        name.set("NetPulse")
+        description.set("A Kotlin Multiplatform library for network and performance monitoring.")
+        url.set("https://github.com/RomanMarinov/NetPulse")
+
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("romanmarinov")
+                name.set("Roman Marinov")
+                email.set("marinov37@mail.ru")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/RomanMarinov/NetPulse")
+            connection.set("scm:git:git://github.com/RomanMarinov/NetPulse.git")
+            developerConnection.set("scm:git:ssh://git@github.com/RomanMarinov/NetPulse.git")
+        }
+    }
+}
+
+//publishing.publications
+//    .withType<MavenPublication>()
+//    .configureEach {
+//        groupId = "io.github.romanmarinov.netpulse"
+////        artifactId = "netpulse"
+//        version = "0.1.0"
+//
+//        pom {
+//            name.set("NetPulse")
+//            description.set("A Kotlin Multiplatform library for network and performance monitoring.")
+//            url.set("https://github.com/RomanMarinov/NetPulse")
+//
+//            licenses {
+//                license {
+//                    name.set("The Apache License, Version 2.0")
+//                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                }
+//            }
+//
+//            developers {
+//                developer {
+//                    id.set("romanmarinov")
+//                    name.set("Roman Marinov")
+//                    email.set("marinov37@mail.ru")
+//                }
+//            }
+//
+//            scm {
+//                connection.set("scm:git:git://github.com/RomanMarinov/NetPulse.git")
+//                developerConnection.set("scm:git:ssh://github.com/RomanMarinov/NetPulse.git")
+//                url.set("https://github.com/RomanMarinov/NetPulse")
+//            }
+//
+//            issueManagement {
+//                system.set("GitHub")
+//                url.set("https://github.com/RomanMarinov/NetPulse/issues")
+//            }
+//        }
+//    }
+//
+//publishing {
+//    repositories {
+//        maven {
+//            name = "OSSRH"
+//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+////            url = uri(
+////                if (version.toString().endsWith("SNAPSHOT"))
+////                    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+////                else
+////                    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+////            )
+//            credentials {
+//                username = project.findProperty("ossrhUsername") as String?
+//                password = project.findProperty("ossrhPassword") as String?
+//            }
+//        }
+//    }
+//}
+//
+//mavenPublishing {
+//    publishToMavenCentral()
+//    signAllPublications()
+//
+//    coordinates(
+//        groupId = "io.github.romanmarinov.netpulse",
+//        artifactId = "netpulse",
+//        version = "0.1.0"
+//    )
+//}

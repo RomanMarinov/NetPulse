@@ -31,10 +31,50 @@
     └── src
         ├── androidMain
         │   └── kotlin
-        │       └── ...   # Android-часть sample-приложения
+        │       └── ...
         ├── commonMain
         │   └── kotlin
-        │       └── ...   # общий код sample-приложения
+        │       └── ...   # общий код sample-приложения которое использует либу netpulse
         └── iosMain
             └── kotlin
-                └── ...   # iOS-часть sample-приложения
+                └── ...
+
+
+/////////////////
+получить приватный ключ gpg
+gpg --list-secret-keys --keyid-format=long
+отправить ключ gpg на сервер
+gpg --keyserver keyserver.ubuntu.com --recv-keys D99066C4
+
+опубликовать локально
+./gradlew publishToMavenLocal
+опубликовать в maven central
+./gradlew publish
+
+////////////////////
+позже дополнить
+    ## Настройка платформ
+    Android
+
+    Дополнительная настройка не требуется.
+
+    iOS
+
+    Добавьте необходимые разрешения в Info.plist:
+    ```
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key><true/>
+    </dict>
+    ```
+     TODO: пример вызова в AppDelegate / SceneDelegate
+
+
+## iOS экспорт библиотеки
+```
+listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
+    iosTarget.binaries.framework {
+        export("app.romanmarinov.netpulse:compose-connectivity:<version>")
+    }
+}
+```
