@@ -76,6 +76,7 @@ LaunchedEffect(stateNetworkSync) {
 ## 2.2 Подписка на изменения соединения
 #### commonMain sourceSet 
 ```
+val connectivityTypeManager: ConnectivityTypeManager = connectivityManagerPlatform()
 var stateNetworkAsync by remember { mutableStateOf<ConnectivityType?>(null) }
 
 LaunchedEffect(connectivityTypeManager) {
