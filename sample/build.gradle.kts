@@ -1,12 +1,6 @@
 import org.gradle.kotlin.dsl.sourceSets
 
 plugins {
-//    alias(libs.plugins.kotlinMultiplatform)
-//    alias(libs.plugins.android.kotlin.multiplatform.library)
-//    alias(libs.plugins.compose.compiler)
-//    alias(libs.plugins.jetbrainsCompose)
-
-
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
@@ -14,33 +8,9 @@ plugins {
 }
 
 kotlin {
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
-
-//    androidLibrary {
-//        namespace = "app.romanmarinov.sample"
-//        compileSdk = 35
-//        minSdk = 26
-//
-////        withHostTestBuilder {  }
-////
-////        withDeviceTestBuilder {
-////            sourceSetTreeName = "test"
-////        }.configure {
-////            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-////        }
-//    }
 
     androidTarget()
 
-    // For iOS targets, this is also where you should
-    // configure native binary output. For more information, see:
-    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
-
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
     listOf(
         iosX64(),
         iosArm64(),
@@ -53,7 +23,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation("androidx.activity:activity-compose:1.9.0")
+            implementation(libs.androidx.activity.compose.v190)
 
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -64,24 +34,14 @@ kotlin {
 
         commonMain.dependencies {
             implementation(project(":netpulse"))
-//            implementation(libs.kotlin.stdlib)
 
             implementation(libs.kotlinx.coroutines.core)
-////            implementation(libs.compose.runtime)
-//            implementation(libs.compose.foundation)
-//            implementation(libs.compose.material3)
-//            implementation(libs.compose.ui)
-////            implementation(libs.compose.resources)
-
-
-//            implementation(libs.kotlinx.coroutines.core)
 
             // Compose Multiplatform
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
-//            implementation(compose.uiTooling)
             implementation(compose.components.resources)
         }
 
@@ -103,7 +63,6 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-//        sourceSets["main"].resources.srcDirs("src/commonMain/resources")
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
 
     // ПОКА УСТАНОВЛЕНА МИН 24, А НАДО 26 ПРОВЕРИТЬ libs.versions.android.minSdk.get().toInt()
@@ -131,8 +90,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // удалено
-            //isUseProguard = false
         }
     }
 
@@ -147,12 +104,4 @@ android {
         buildConfig = true
         compose = true
     }
-
-//    dependencies {
-//        // ui
-//        debugImplementation(compose.uiTooling)
-//        implementation(libs.compose.ui)
-//        implementation(libs.compose.runtime)
-//        implementation(libs.compose.foundation)
-//    }
 }
