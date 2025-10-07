@@ -35,8 +35,6 @@ sourceSets {
 ```
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
-
-
 ## 1. Создайте менеджер для отслеживания типа подключения
 #### AndroidMain sourceSet 
 ```
@@ -76,6 +74,7 @@ LaunchedEffect(stateNetworkSync) {
 }
 ```
 ## 3. Подписка на изменения соединения
+#### commonMain sourceSet 
 ```
 var stateNetworkAsync by remember { mutableStateOf<ConnectivityType?>(null) }
 
