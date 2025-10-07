@@ -2,11 +2,6 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.romanmarinov.netpulse/netpulse)](https://search.maven.org/artifact/io.github.romanmarinov.netpulse/netpulse)
 
-
-[![Maven Central](https://img.shields.io/maven-central/v/app.romanmarinov.netpulse/compose-connectivity)](https://central.sonatype.com/artifact/app.romanmarinov.netpulse/compose-connectivity)
-![badge-android]
-![badge-ios]
-
 ## Требования к сборке
 
 [![Kotlin 2.2.0](https://img.shields.io/badge/Kotlin-2.2.10-blue?style=flat-square)](https://kotlinlang.org/)  
