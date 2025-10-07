@@ -34,7 +34,31 @@ sourceSets {
 ```
 ## Использование
 1. Инициализация
-// TODO: пример инициализации библиотеки
+Создайте менеджер для отслеживания типа подключения:
+sourceSet AndroidMain
+```
+kotlin
+import app.romanmarinov.netpulse.ConnectivityTypeManager
+import app.romanmarinov.netpulse.factory.connectivityManagerFactory
+import util.AppContextPlatform
+
+actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
+    val context = AppContextPlatform.get()
+    return connectivityManagerFactory(context = context)
+}
+```
+sourceSet iosMain
+```
+kotlin
+import app.romanmarinov.netpulse.ConnectivityTypeManager
+import app.romanmarinov.netpulse.factory.connectivityManagerFactory
+
+actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
+    return connectivityManagerFactory()
+}
+```
+
+
 
 2. Получение текущего статуса сети
 // TODO: пример получения текущего статуса подключения
