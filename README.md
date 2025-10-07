@@ -1,5 +1,8 @@
 # NetPulse
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.romanmarinov.netpulse/netpulse)](https://search.maven.org/artifact/io.github.romanmarinov.netpulse/netpulse)
+
+
 [![Maven Central](https://img.shields.io/maven-central/v/app.romanmarinov.netpulse/compose-connectivity)](https://central.sonatype.com/artifact/app.romanmarinov.netpulse/compose-connectivity)
 ![badge-android]
 ![badge-ios]
