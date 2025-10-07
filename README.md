@@ -20,7 +20,7 @@
 - Поддержка Android и iOS
 - Простая интеграция с **Compose Multiplatform**  
 
-## Установка
+## 1. Установка
 
 Добавьте зависимость из **Maven Central**:
 #### commonMain sourceSet 
@@ -35,7 +35,7 @@ sourceSets {
 ```
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
-## Создайте менеджер для отслеживания типа подключения
+## 2. Создайте менеджер для отслеживания типа подключения
 #### AndroidMain sourceSet 
 ```
 import app.romanmarinov.netpulse.ConnectivityTypeManager
@@ -56,7 +56,7 @@ actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
     return connectivityManagerFactory()
 }
 ```
-## Получение текущего статуса сети
+## 2.1. Получение текущего статуса сети
 #### commonMain sourceSet 
 ```
 val connectivityTypeManager: ConnectivityTypeManager = connectivityManagerPlatform()
@@ -73,7 +73,7 @@ LaunchedEffect(stateNetworkSync) {
     Logger.d("Cellular: ${stateNetworkSync?.cellular}")
 }
 ```
-## Подписка на изменения соединения
+## 2.2 Подписка на изменения соединения
 #### commonMain sourceSet 
 ```
 var stateNetworkAsync by remember { mutableStateOf<ConnectivityType?>(null) }
@@ -90,46 +90,36 @@ LaunchedEffect(stateNetworkAsync) {
     Logger.d("Cellular: ${stateNetworkAsync?.cellular}")
 }
 ```
-4. Проверка конкретного типа подключения
-// TODO: пример проверки Wi-Fi / Cellular / VPN
 
-## iOS экспорт библиотеки
-```
-listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
-    iosTarget.binaries.framework {
-        export("app.romanmarinov.netpulse:compose-connectivity:<version>")
-    }
-}
-```
+//## iOS экспорт библиотеки
+//```
+//listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
+//    iosTarget.binaries.framework {
+//        export("app.romanmarinov.netpulse:compose-connectivity:<version>")
+//    }
+//}
+//```
 ## Минимальные требования
 
 Android: minSdk 24
 
-iOS: iOS 14.1+
+//iOS: iOS 14.1+
 
-## Настройка платформ
-Android
+//## Настройка платформ
+//Android
 
-Дополнительная настройка не требуется.
+//Дополнительная настройка не требуется.
 
-iOS
+//iOS
 
-Добавьте необходимые разрешения в Info.plist:
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSAllowsArbitraryLoads</key><true/>
-</dict>
-```
+//Добавьте необходимые разрешения в Info.plist:
+//```
+//<key>NSAppTransportSecurity</key>
+//<dict>
+//  <key>NSAllowsArbitraryLoads</key><true/>
+//</dict>
+//```
 // TODO: пример вызова в AppDelegate / SceneDelegate
-
-## Документация
-
-Полное описание API: [в разработке]
-
-## Полезные ссылки
-
-TODO: добавить ссылки на статьи / примеры
 
 ## Лицензия
 
