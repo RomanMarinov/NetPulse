@@ -33,8 +33,8 @@ sourceSets {
 }
 ```
 ## Использование
-1. Создайте менеджер для отслеживания типа подключения:\n
-sourceSet AndroidMain
+1. Создайте менеджер для отслеживания типа подключения:
+#### sourceSet AndroidMain
 ```
 kotlin
 import app.romanmarinov.netpulse.ConnectivityTypeManager
@@ -46,7 +46,7 @@ actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
     return connectivityManagerFactory(context = context)
 }
 ```
-sourceSet iosMain
+#### sourceSet iosMain
 ```
 kotlin
 import app.romanmarinov.netpulse.ConnectivityTypeManager
