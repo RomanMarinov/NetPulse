@@ -90,39 +90,11 @@ LaunchedEffect(stateNetworkAsync) {
     Logger.d("Cellular: ${stateNetworkAsync?.cellular}")
 }
 ```
-<details>
-<summary>
-//## iOS экспорт библиотеки
-//```
-//listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
-//    iosTarget.binaries.framework {
-//        export("app.romanmarinov.netpulse:compose-connectivity:<version>")
-//    }
-//}
-//```
-  </summary>
-  </details>
 ## Минимальные требования
 
 Android: minSdk 24
 
-//iOS: iOS 14.1+
-
-//## Настройка платформ
-//Android
-
-//Дополнительная настройка не требуется.
-
-//iOS
-
-//Добавьте необходимые разрешения в Info.plist:
-//```
-//<key>NSAppTransportSecurity</key>
-//<dict>
-//  <key>NSAllowsArbitraryLoads</key><true/>
-//</dict>
-//```
-// TODO: пример вызова в AppDelegate / SceneDelegate
+iOS: iOS 14.1+
 
 ## Лицензия
 
