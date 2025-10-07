@@ -4,7 +4,7 @@
 
 ## Требования к сборке
 
-[![Kotlin 2.2.0](https://img.shields.io/badge/Kotlin-2.2.10-blue?style=flat-square)](https://kotlinlang.org/)  
+[![Kotlin 2.2.0](https://img.shields.io/badge/Kotlin-2.2.0-blue?style=flat-square)](https://kotlinlang.org/)
 [![Compose Multiplatform 1.8.2](https://img.shields.io/badge/Compose%20Multiplatform-1.8.2-purple?style=flat-square)](https://github.com/JetBrains/compose-multiplatform)  
 [![Android Gradle Plugin 8.10.1](https://img.shields.io/badge/Android%20Gradle%20Plugin-8.10.1-green?style=flat-square)](https://developer.android.com/studio/releases/gradle-plugin)
 
