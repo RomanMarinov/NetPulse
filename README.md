@@ -25,18 +25,15 @@
 Добавьте зависимость из **Maven Central** в `commonMain`:
 
 ```
-kotlin
 sourceSets {
     commonMain.dependencies {
          implementation("io.github.romanmarinov.netpulse:netpulse:<version>")
     }
 }
 ```
-## Использование
-1. Создайте менеджер для отслеживания типа подключения:
+## 1. Создайте менеджер для отслеживания типа подключения
 #### AndroidMain sourceSet 
 ```
-kotlin
 import app.romanmarinov.netpulse.ConnectivityTypeManager
 import app.romanmarinov.netpulse.factory.connectivityManagerFactory
 import util.AppContextPlatform
@@ -48,7 +45,6 @@ actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
 ```
 #### iosMain sourceSet 
 ```
-kotlin
 import app.romanmarinov.netpulse.ConnectivityTypeManager
 import app.romanmarinov.netpulse.factory.connectivityManagerFactory
 
@@ -56,15 +52,33 @@ actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
     return connectivityManagerFactory()
 }
 ```
+## 2. Получение текущего статуса сети
+#### commonMain sourceSet 
+```
+val connectivityTypeManager: ConnectivityTypeManager = connectivityManagerPlatform()
+var stateNetworkSync by remember { mutableStateOf<ConnectivityType?>(null) }
 
+// Получение текущего типа подключения по кнопке
+Button(onClick = { stateNetworkSync = connectivityTypeManager.getType() }) {
+    Text("Проверить сеть")
+}
+```
+## 3. Подписка на изменения соединения
+```
+var stateNetworkAsync by remember { mutableStateOf<ConnectivityType?>(null) }
 
+LaunchedEffect(connectivityTypeManager) {
+    connectivityTypeManager.observeType().collectLatest { connectivityType ->
+        stateNetworkAsync = connectivityType
+    }
+}
 
-2. Получение текущего статуса сети
-// TODO: пример получения текущего статуса подключения
-
-3. Подписка на изменения соединения
-// TODO: пример наблюдения за изменениями статуса сети
-
+LaunchedEffect(stateNetworkAsync) {
+    Logger.d("VPN: ${stateNetworkAsync?.vpn}")
+    Logger.d("Wi-Fi: ${stateNetworkAsync?.wifi}")
+    Logger.d("Cellular: ${stateNetworkAsync?.cellular}")
+}
+```
 4. Проверка конкретного типа подключения
 // TODO: пример проверки Wi-Fi / Cellular / VPN
 
