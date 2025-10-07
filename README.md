@@ -1,4 +1,4 @@
-# NetPulse
+# NetPulse - Compose Multiplatform
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.romanmarinov.netpulse/netpulse)](https://search.maven.org/artifact/io.github.romanmarinov.netpulse/netpulse)
 
