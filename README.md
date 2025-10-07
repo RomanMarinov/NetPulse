@@ -22,8 +22,8 @@
 
 ## Установка
 
-Добавьте зависимость из **Maven Central** в `commonMain`:
-
+Добавьте зависимость из **Maven Central**:
+#### commonMain sourceSet 
 ```
 sourceSets {
     commonMain.dependencies {
@@ -31,6 +31,12 @@ sourceSets {
     }
 }
 ```
+#### manifest 
+```
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+
 ## 1. Создайте менеджер для отслеживания типа подключения
 #### AndroidMain sourceSet 
 ```
@@ -39,7 +45,7 @@ import app.romanmarinov.netpulse.factory.connectivityManagerFactory
 import util.AppContextPlatform
 
 actual fun connectivityManagerPlatform(): ConnectivityTypeManager {
-    val context = AppContextPlatform.get()
+    val context = AppContextPlatform.get() // ваш способ получения context
     return connectivityManagerFactory(context = context)
 }
 ```
@@ -61,6 +67,12 @@ var stateNetworkSync by remember { mutableStateOf<ConnectivityType?>(null) }
 // Получение текущего типа подключения по кнопке
 Button(onClick = { stateNetworkSync = connectivityTypeManager.getType() }) {
     Text("Проверить сеть")
+}
+
+LaunchedEffect(stateNetworkSync) {
+    Logger.d("VPN: ${stateNetworkSync?.vpn}")
+    Logger.d("Wi-Fi: ${stateNetworkSync?.wifi}")
+    Logger.d("Cellular: ${stateNetworkSync?.cellular}")
 }
 ```
 ## 3. Подписка на изменения соединения
@@ -84,7 +96,6 @@ LaunchedEffect(stateNetworkAsync) {
 
 ## iOS экспорт библиотеки
 ```
-kotlin
 listOf(iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
     iosTarget.binaries.framework {
         export("app.romanmarinov.netpulse:compose-connectivity:<version>")
